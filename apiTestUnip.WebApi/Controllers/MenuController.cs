@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using apiTestUnip.WebApi.Model;
 using apiTestUnip.WebApi.Repository;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace apiTestUnip.WebApi.Controllers
 {
+    [EnableCors("SiteCorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class MenuController : ControllerBase

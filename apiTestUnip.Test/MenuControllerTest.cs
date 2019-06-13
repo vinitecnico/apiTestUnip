@@ -8,16 +8,16 @@ using Xunit;
 
 namespace apiTestUnip.Test {
     public class MenuControllerTest {
-        private readonly MenuController controller;
+        private readonly IRepository<apiTestUnip.WebApi.Model.MainMenu> _mainMenuRepository;
 
-        public MenuControllerTest () {
-            this.controller = new MenuController (null);
+        public MenuControllerTest (IRepository<apiTestUnip.WebApi.Model.MainMenu> mainMenuRepository) {
+            this._mainMenuRepository = mainMenuRepository;
         }
 
         [Fact]
         public async void Get () {
             // Act
-            var okResult = await controller.Get ();
+            var okResult = await this._mainMenuRepository.GetAll();
             // Assert
             Assert.NotEmpty (okResult);
         }
