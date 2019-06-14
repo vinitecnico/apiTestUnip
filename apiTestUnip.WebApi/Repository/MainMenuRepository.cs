@@ -22,7 +22,7 @@ namespace apiTestUnip.WebApi.Repository
 
         public async Task<bool> Delete(string id)
         {
-            var result = await _context.collection.FindOneAndDeleteAsync(x => x.Id == ObjectId.Parse(id));
+            var result = await _context.collection.FindOneAndDeleteAsync(x => x.Id == id);
             return true;
         }
 
@@ -33,14 +33,12 @@ namespace apiTestUnip.WebApi.Repository
 
         public async Task<MainMenu> GetById(string id)
         {
-            return await _context.collection.Find(x => x.Id == ObjectId.Parse(id)).FirstOrDefaultAsync();
+            return await _context.collection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task Update(string id, MainMenu item)
         {
-            var filter = Builders<MainMenu>.Filter.Eq(s => s.Id, ObjectId.Parse(id));
-            var update = Builders<MainMenu>.Update.Set(s => s.name, item.name);
-            await _context.collection.UpdateOneAsync(filter, update);
+            await _context.collection.ReplaceOneAsync(doc => doc.Id == id, item);
         }
     }
 }

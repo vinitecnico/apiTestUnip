@@ -7,7 +7,8 @@ namespace apiTestUnip.WebApi.Model {
     public class MainMenu
     {
         [BsonId]
-        public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string  Id { get; set; }
         public string name { get; set; }
 
         public string icon { get; set; }
